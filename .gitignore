@@ -1,6 +1,6 @@
 # Compiled class file
 *.class
-
+.DS_Store
 # Log file
 *.log
 
@@ -30,7 +30,7 @@ back-end/kotlin/.idea/vcs.xml
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/node_modules
+/front-end/node_modules/
 /.pnp
 .pnp.js
 
