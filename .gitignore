@@ -31,6 +31,9 @@ back-end/kotlin/.idea/vcs.xml
 
 # dependencies
 /front-end/node_modules/
+/front-end/.next/
+/front-end/out/
+
 /.pnp
 .pnp.js
 
@@ -38,7 +41,6 @@ back-end/kotlin/.idea/vcs.xml
 /coverage
 
 # next.js
-/.next/
 /out/
 
 # production
@@ -63,3 +65,4 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
