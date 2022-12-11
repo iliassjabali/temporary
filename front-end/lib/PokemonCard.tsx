@@ -1,76 +1,80 @@
-import { useQuery } from "@tanstack/react-query";
-import Image from "next/image";
-export default ({
-  name,
-  url,
-  index,
-  setFavorite,
-  isFavorite,
-  setSelectedPokemon,
-}: {
-  name: string;
-  url: string;
-  index: number;
-  setFavorite: (name: string) => void;
-  isFavorite: boolean;
-  setModelState: (state: boolean) => void;
-  setSelectedPokemon: setSelectedPokemonType;
-}) => {
-  const { data, error, status } = useQuery({
-    queryKey: ["Pokemon", name],
-    queryFn: () =>
-      fetch(url)
-        .then((res) => res.json())
-        .then((data) => ({
-          base_experience: data.base_experience as number,
-          image: data.sprites.other["official-artwork"].front_default as string,
-          height: data.height as number,
-          weight: data.weight as number,
-          specieName: data.species.name as string,
-        })),
-  });
+import { useQuery } from '@tanstack/react-query';
+import Image from 'next/image';
+import { useDispatch } from 'react-redux';
+import { selectedPokemon } from '@lib/Context';
 
-  if (data !== undefined) {
-    return (
-      <button
-        onClick={() => {
-          setSelectedPokemon({
-            name: name,
-            image: data.image,
-            base_experience: data.base_experience,
-            weight: data.weight,
-            height: data.height,
-            specieName: data.specieName,
-          });
-        }}
-        key={index}
-        type="button"
-        className="border p-4 h-200 w-100 border-gray-200 rounded-lg overflow-hidden bg-[#FFDE00] hover:bg-[#B3A125]"
-      >
-        <div className="contaier  h-100 w-100">
-          <Image
-            src={data.image}
-            alt={name}
-            width={100}
-            height={100}
-            placeholder="empty"
-            className="w-full h-full object-cover"
-          />
-        </div>
-        <h3 className="capitalize font-bold text-xl mb-2 p-6">{name}</h3>
-        <div className="flex justify-between">
-          <div className="flex flex-col">
-            <p className="text-sm">Height: {data.height}</p>
-            <p className="text-sm">Weight: {data.weight}</p>
-            <p className="text-sm">Base Experience: {data.base_experience}</p>
-          </div>
-        </div>
-      </button>
-    );
-  } else {
-    if (error) {
-      console.log("Error at " + name + " " + error);
-    }
-    return null;
-  }
+function getPokemonNumber(url: string) {
+	// Use a regular expression to extract the number from the URL
+}
+export default ({ name, url }: { name: string | null; url: string | null }) => {
+	const { data, error, status } = useQuery({
+		queryKey: ['Pokemon', name],
+		queryFn: async () => {
+			if (url !== null) {
+				return fetch(url)
+					.then((res) => res.json())
+					.then((data) => ({
+						url: data.url,
+						base_experience: data.base_experience as number,
+						image: data.sprites.other['official-artwork']
+							.front_default as string,
+						height: data.height as number,
+						weight: data.weight as number,
+						specieName: data.species.name as string,
+						name: data.name as string,
+						index: data.id as number,
+					}));
+			}
+			throw new Error('No URL');
+		},
+	});
+	const dispatch = useDispatch();
+	if (data !== undefined) {
+		return (
+			<button
+				onClick={() => {
+					dispatch(
+						selectedPokemon({
+							url: data.url,
+							name: data.name,
+							image: data.image,
+							base_experience: data.base_experience,
+							weight: data.weight,
+							height: data.height,
+							specieName: data.specieName,
+						})
+					);
+				}}
+				key={data.index}
+				type="button"
+				className="border p-4 h-200 w-100 border-gray-200 rounded-lg overflow-hidden bg-[#FFDE00] hover:bg-[#B3A125]"
+			>
+				<div className="container  h-100 w-100">
+					<Image
+						src={data.image}
+						alt={data.name}
+						width={100}
+						height={100}
+						placeholder="empty"
+						className="w-full h-full object-cover"
+					/>
+				</div>
+				<h3 className="capitalize  text-xl mb-2 p-3">{data.name}</h3>
+				<div className="flex justify-between">
+					<div className="flex flex-col">
+						<p className="text-sm">Height: {data.height}</p>
+						<p className="text-sm">Weight: {data.weight}</p>
+						<p className="text-sm">
+							Base Experience: {data.base_experience}
+						</p>
+					</div>
+				</div>
+			</button>
+		);
+	} else {
+		if (error) {
+			console.log('Error at ' + name + ' ' + error);
+		}
+		return null;
+	}
 };

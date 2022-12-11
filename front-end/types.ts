@@ -2,6 +2,7 @@ import { SetStateAction, Dispatch } from "react";
 
 declare global {
   type PokemonData = {
+    url : string;
     name: string;
     image: string;
     base_experience: number;

@@ -1,0 +1,11 @@
+{
+    "singleQuote": true,
+    "useTabs": true,
+    "tabWidth": 4,
+    "jsxBracketSameLine": false,
+    "eslintIntegration": false,
+    "tslintIntegration": true,
+    "parser": "typescript",
+    "requireConfig": false,
+    "stylelintIntegration": false
+}
