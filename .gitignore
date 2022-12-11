@@ -66,3 +66,40 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+/shop/HELP.md
+/shop/.gradle
+/shop/build/
+/shop/!gradle/wrapper/gradle-wrapper.jar
+/shop/!/src/main//build/
+/shop/!/src/test//build/
+
+STS
+/shop/.apt_generated
+/shop/.classpath
+/shop/.factorypath
+/shop/.project
+/shop/.settings
+/shop/.springBeans
+/shop/.sts4-cache
+/shop/bin/
+/shop/!/src/main//bin/
+/shop/!/src/test//bin/
+
+IntelliJ IDEA
+/shop/.idea
+/shop/.iws
+/shop/.iml
+/shop/*.ipr
+/shop/out/
+/shop/!/src/main//out/
+/shop/!/src/test//out/
+
+NetBeans
+/shop/nbproject/private/
+/shop/nbbuild/
+/shop/dist/
+/shop/nbdist/
+/shop/.nb-gradle/
+
+VS Code
+/shop/.vscode/
