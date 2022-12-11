@@ -3,9 +3,7 @@ import Image from 'next/image';
 import { useDispatch } from 'react-redux';
 import { selectedPokemon } from '@lib/Context';
 
-function getPokemonNumber(url: string) {
-	// Use a regular expression to extract the number from the URL
-}
+
 export default ({ name, url }: { name: string | null; url: string | null }) => {
 	const { data, error, status } = useQuery({
 		queryKey: ['Pokemon', name],
@@ -73,7 +71,7 @@ export default ({ name, url }: { name: string | null; url: string | null }) => {
 		);
 	} else {
 		if (error) {
-			console.log('Error at ' + name + ' ' + error);
+			console.log('Error at ' + name );
 		}
 		return null;
 	}

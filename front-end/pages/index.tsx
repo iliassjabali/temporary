@@ -7,7 +7,7 @@ import PokemonModal from '@lib/PokemonModal';
 import { useSelector, useDispatch } from 'react-redux';
 import { resetPokemonTeam, RootState } from '@lib/Context';
 
-const ELEMENTS_PER_PAGE = 14; //
+const ELEMENTS_PER_PAGE = 14; // 14 is the max number of pokemon per page, could be changed to 28 since a row is only 7
 
 export default () => {
 	const { pokemonTeam, selectedPokemon } = useSelector(
@@ -29,6 +29,7 @@ export default () => {
 			fetch(
 				`https://pokeapi.co/api/v2/pokemon?limit=${ELEMENTS_PER_PAGE}&offset=${pageParam}`
 			).then((res) => res.json()) as Promise<{
+				//Schema of the response according to the API
 				count: number;
 				next: string;
 				previous: string | null;
@@ -45,6 +46,9 @@ export default () => {
 	});
 	const bottomBoundaryRef = useRef(null);
 	useEffect(() => {
+		// IntersectionObserver is a browser API that allows us to know when an element is visible
+		// in the viewport. We can use it to trigger a fetch for the next page when the user scrolls 
+		// to the bottom of the list.
 		const observer = new IntersectionObserver(
 			(entries) => {
 				if (entries[0].isIntersecting && hasNextPage) {
@@ -67,14 +71,13 @@ export default () => {
 				{pokemonTeam.length > 0 ? 'Pokémon Team' : 'Pokémon Registry'}
 			</h1>
 			{
-				// check if the pokemon is already contain any pokemon
+				// check if the pokemonTeam contains any pokemon
 				pokemonTeam.length > 0 && (
 					<div className="grid gap-4">
 						<div className=" flex flex-cols-2 gap-4 md:grid md:grid-cols-7 items-center">
 							{pokemonTeam.map((pokemon) => (
 								<PokemonCard {...pokemon} />
 							))}
-							
 						</div>
 						<button
 							className=" font-bold py-2 px-4 rounded w-auto bg-[#FFDE00] hover:bg-[#B3A125] mx-auto"
@@ -92,7 +95,13 @@ export default () => {
 			}
 			{selectedPokemon && <PokemonModal {...selectedPokemon} />}
 			{status === 'error' && (
-				<p className="text-red-500">Error: {JSON.stringify(error)}</p>
+				<div
+					className="flex flex-col items-center justify-center"
+				>
+					<h1 className="text-3xl font-bold pb-4">
+						An error has occurred
+					</h1>
+				</div>
 			)}
 			{status === 'success' && (
 				<div
@@ -102,8 +111,8 @@ export default () => {
 					{data.pages.map((group, i) => (
 						<div
 							className="grid grid-cols-2 gap-4 align-middle md:grid-cols-7 mx-2"
-							//TODO: this grid should be inn the other div
 							key={i}
+							//per the documentation of react-query, we should use the index of the page as the key of the group
 						>
 							{group.results.length === 0 ? (
 								<div className="flex flex-col items-center justify-center">

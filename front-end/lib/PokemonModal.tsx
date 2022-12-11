@@ -2,7 +2,6 @@ import Image from 'next/image';
 import { addPokemon, removePokemon, RootState, Clear } from '@lib/Context';
 import { useDispatch, useSelector } from 'react-redux';
 
-
 export default ({
 	name,
 	url,
@@ -12,7 +11,7 @@ export default ({
 	base_experience,
 	specieName,
 }: PokemonData) => {
-	const Dispatch = useDispatch() ;
+	const Dispatch = useDispatch();
 	const pokemonTeam = useSelector(
 		(state: RootState) => state.pokemonTeam.pokemonTeam
 	);
