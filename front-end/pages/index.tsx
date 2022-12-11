@@ -1,11 +1,11 @@
 import Loading from '@lib/Loading';
-import Image from 'next/image';
-import { useState, useEffect, useRef } from 'react';
+
+import {  useEffect, useRef } from 'react';
 import PokemonCard from '@lib/PokemonCard';
-import { useQuery, useInfiniteQuery } from '@tanstack/react-query';
+import {  useInfiniteQuery } from '@tanstack/react-query';
 import PokemonModal from '@lib/PokemonModal';
 import { useSelector, useDispatch } from 'react-redux';
-import { resetPokemonTeam, RootState } from '@lib/Context';
+import { resetPokemonTeam } from '@lib/Context';
 
 const ELEMENTS_PER_PAGE = 14; // 14 is the max number of pokemon per page, could be changed to 28 since a row is only 7
 

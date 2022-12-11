@@ -1,19 +1,19 @@
 import { configureStore, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { useDispatch, useSelector } from 'react-redux';
 
 type PokemonContextType = { name: string; url: string };
 
 const PokemonTeam = createSlice({
 	name: 'pokemonTeam',
 	initialState: {
-		pokemonTeam: [] as PokemonContextType[],
+		pokemonTeam: [] as { name: string; url: string }[],
 	},
 	reducers: {
 		addPokemon: (state, action: PayloadAction<PokemonContextType>) => {
 			//check if the PokemonContextType is already in the team
 			if (
 				state.pokemonTeam.findIndex(
-					(PokemonContextType) => PokemonContextType.name === action.payload.name
+					(PokemonContextType) =>
+						PokemonContextType.name === action.payload.name
 				) === -1
 			) {
 				state.pokemonTeam.push(action.payload);
@@ -39,7 +39,15 @@ const PokemonTeam = createSlice({
 const SelectedPokemon = createSlice({
 	name: 'selectedPokemon',
 	initialState: {
-		Pokemon: null as PokemonData | null,
+		Pokemon: null as {
+			url: string;
+			name: string;
+			image: string;
+			base_experience: number;
+			weight: number;
+			height: number;
+			specieName: string;
+		} | null,
 	},
 	reducers: {
 		selectedPokemon: (state, action: PayloadAction<PokemonData>) => {

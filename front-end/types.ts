@@ -1,5 +1,5 @@
 import { SetStateAction, Dispatch } from "react";
-
+import {store} from "@lib/Context";
 declare global {
   type PokemonData = {
     url : string;
@@ -10,5 +10,6 @@ declare global {
     height: number;
     specieName: string;
   };
+  type RootState = ReturnType<typeof store.getState>;
   type setSelectedPokemonType = Dispatch<SetStateAction<PokemonData | null>>;
 }
