@@ -58,21 +58,13 @@ export default ({ name, url }: { name: string | null; url: string | null }) => {
 					/>
 				</div>
 				<h3 className="capitalize  text-xl mb-2 p-3">{data.name}</h3>
-				<div className="flex justify-between">
-					<div className="flex flex-col">
-						<p className="text-sm">Height: {data.height}</p>
-						<p className="text-sm">Weight: {data.weight}</p>
-						<p className="text-sm">
-							Base Experience: {data.base_experience}
-						</p>
-					</div>
-				</div>
+				
 			</button>
 		);
 	} else {
 		if (error) {
 			console.log('Error at ' + name );
 		}
-		return null;
+		return (<></>)
 	}
 };

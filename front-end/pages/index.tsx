@@ -66,7 +66,7 @@ export default () => {
 		return <Loading />;
 	}
 	return (
-		<div className="flex flex-col items-center justify-center min-h-screen py-2">
+		<div className="flex flex-col items-center justify-center min-h-screen py-2 bg-[#2a75bb]">
 			<h1 className="text-3xl font-bold pb-4">
 				{pokemonTeam.length > 0 ? 'Pokémon Team' : 'Pokémon Registry'}
 			</h1>
