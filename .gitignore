@@ -94,12 +94,6 @@ IntelliJ IDEA
 /shop/!/src/main//out/
 /shop/!/src/test//out/
 
-NetBeans
-/shop/nbproject/private/
-/shop/nbbuild/
-/shop/dist/
-/shop/nbdist/
-/shop/.nb-gradle/
 
 VS Code
 /shop/.vscode/
