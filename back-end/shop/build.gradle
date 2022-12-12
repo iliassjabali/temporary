@@ -19,9 +19,13 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter'
 	implementation 'org.jetbrains.kotlin:kotlin-reflect'
 	implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
+	implementation 'net.eusashead.hateoas:spring-halbuilder-page:1.0.0.RELEASE'
+	implementation 'org.hibernate:hibernate-annotations:3.5.6-Final'
 	runtimeOnly 'org.postgresql:postgresql'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation 'org.hibernate:hibernate-core:5.4.32.Final'
 }
+
 
 tasks.withType(KotlinCompile) {
 	kotlinOptions {

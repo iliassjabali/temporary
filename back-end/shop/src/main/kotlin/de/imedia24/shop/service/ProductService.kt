@@ -8,6 +8,14 @@ import org.springframework.stereotype.Service
 class ProductService(private val productRepository: ProductRepository) {
 
     fun findProductBySku(sku: String): ProductResponse? {
-        TODO("to be implemented")
+        return productRepository.findBySku(sku)?.let {
+            ProductResponse(
+                sku = it.sku,
+                name = it.name,
+                description = it.description ?: "",
+                price = it.price,
+            )
+        }
     }
+
 }

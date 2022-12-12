@@ -31,4 +31,8 @@ data class ProductEntity(
     @UpdateTimestamp
     @Column(name = "updated_at", nullable = false)
     val updatedAt: ZonedDateTime
-)
+) {
+
+    constructor() : this("", "", null, BigDecimal.ZERO, ZonedDateTime.now(), ZonedDateTime.now())
+
+    }
