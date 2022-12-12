@@ -1,0 +1,22 @@
+image: openjdk:8
+
+variables:
+  MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
+
+before_script:
+  - apt-get update -qy
+  - apt-get install -y maven
+
+stages:
+  - build
+  - test
+
+build:
+  stage: build
+  script:
+    - mvn clean package
+
+test:
+  stage: test
+  script:
+    - mvn test
