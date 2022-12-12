@@ -24,15 +24,28 @@ data class ProductEntity(
     @Column(name = "price", nullable = false)
     val price: BigDecimal,
 
+    @Column( name = "stock", nullable = false)
+    val stock: BigDecimal,
+
     @UpdateTimestamp
     @Column(name = "created_at", nullable = false)
     val createdAt: ZonedDateTime,
 
     @UpdateTimestamp
     @Column(name = "updated_at", nullable = false)
-    val updatedAt: ZonedDateTime
+    val updatedAt: ZonedDateTime,
+
+
 ) {
 
-    constructor() : this("", "", null, BigDecimal.ZERO, ZonedDateTime.now(), ZonedDateTime.now())
-
+    constructor() : this(
+        sku = "",
+        name = "",
+        description = null,
+        price = BigDecimal.ZERO,
+        stock = BigDecimal.ZERO,
+        createdAt = ZonedDateTime.now(),
+        updatedAt = ZonedDateTime.now()
+    )
     }
+
