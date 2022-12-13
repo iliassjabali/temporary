@@ -1,5 +1,4 @@
 import { configureStore, createSlice, PayloadAction } from '@reduxjs/toolkit';
-
 type PokemonContextType = { name: string; url: string };
 
 const PokemonTeam = createSlice({

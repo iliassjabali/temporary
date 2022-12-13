@@ -1,15 +1,14 @@
-import Loading from '@lib/Loading';
+import Loading from '@/components/Loading';
 
 import {  useEffect, useRef } from 'react';
-import PokemonCard from '@lib/PokemonCard';
-import {  useInfiniteQuery } from '@tanstack/react-query';
-import PokemonModal from '@lib/PokemonModal';
+import PokemonCard from '@/components/PokemonCard';
+import PokemonModal from '@/components/PokemonModal';
 import { useSelector, useDispatch } from 'react-redux';
-import { resetPokemonTeam } from '@lib/Context';
-
-const ELEMENTS_PER_PAGE = 14; // 14 is the max number of pokemon per page, could be changed to 28 since a row is only 7
+import { resetPokemonTeam } from '@/components/Context';
+import useInfiniteQuery from '../hooks/useInfiniteQuery';
 
 export default () => {
+	const ELEMENTS_PER_PAGE = 14; // 14 is the max number of pokemon per page, could be changed to 28 since a row is only 7
 	const { pokemonTeam, selectedPokemon } = useSelector(
 		(state: RootState) => ({
 			pokemonTeam: state.pokemonTeam.pokemonTeam,
@@ -18,32 +17,11 @@ export default () => {
 	);
 	const {
 		data,
-		error,
 		fetchNextPage,
 		hasNextPage,
 		isFetchingNextPage,
 		status,
-	} = useInfiniteQuery({
-		queryKey: ['Pokemons'],
-		queryFn: ({ pageParam = 0 }) =>
-			fetch(
-				`https://pokeapi.co/api/v2/pokemon?limit=${ELEMENTS_PER_PAGE}&offset=${pageParam}`
-			).then((res) => res.json()) as Promise<{
-				//Schema of the response according to the API
-				count: number;
-				next: string;
-				previous: string | null;
-				results: {
-					name: string | null;
-					url: string | null;
-				}[];
-			}>,
-		getNextPageParam: (lastPage, pages) => {
-			if (lastPage.next) {
-				return pages.length * ELEMENTS_PER_PAGE;
-			}
-		},
-	});
+	} = useInfiniteQuery(ELEMENTS_PER_PAGE);
 	const bottomBoundaryRef = useRef(null);
 	useEffect(() => {
 		// IntersectionObserver is a browser API that allows us to know when an element is visible

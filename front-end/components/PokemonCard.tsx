@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 import { useDispatch } from 'react-redux';
-import { selectedPokemon } from '@lib/Context';
+import { selectedPokemon } from './Context';
 
 
 export default ({ name, url }: { name: string | null; url: string | null }) => {

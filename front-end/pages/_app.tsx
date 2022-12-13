@@ -1,8 +1,8 @@
 import '../styles/globals.css';
 import type { AppProps } from 'next/app';
-import { store } from '@lib/Context';
+import { store } from '../components/Context';
 import { Provider } from 'react-redux';
-import { StrictMode } from 'react';
+import { ReactNode, StrictMode } from 'react';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Head from 'next/head';
@@ -14,17 +14,23 @@ const queryClient = new QueryClient({
 		},
 	},
 });
+export const ReduxProvider = ({ children }: {children : ReactNode}) => (
+	<Provider store={store}>{children}</Provider>
+);
+export const QueryProvider = ({ children }: {children : ReactNode}) => (
+	<QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+);
 
 export default ({ Component, pageProps }: AppProps) => (
 	<StrictMode>
-		<Provider store={store}>
-			<QueryClientProvider client={queryClient}>
+		<ReduxProvider>
+			<QueryProvider>
 				<Head>
 					<title>Front end</title>
 					<link rel="icon" href="/favicon.ico" />
 				</Head>
 				<Component {...pageProps} />
-			</QueryClientProvider>
-		</Provider>
+			</QueryProvider>
+		</ReduxProvider>
 	</StrictMode>
 );

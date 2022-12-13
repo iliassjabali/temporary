@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { addPokemon, removePokemon, RootState, Clear } from '@lib/Context';
+import { addPokemon, removePokemon, RootState, Clear } from './Context';
 import { useDispatch, useSelector } from 'react-redux';
 
 export default ({

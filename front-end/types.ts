@@ -1,5 +1,5 @@
 import { SetStateAction, Dispatch } from "react";
-import {store} from "@lib/Context";
+import {store} from "./components/Context";
 declare global {
   type PokemonData = {
     url : string;
